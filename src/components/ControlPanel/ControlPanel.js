@@ -1,13 +1,38 @@
 import React, { Fragment } from 'react'
 
 // MUI
-import { Typography, Grid } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 // Styles
 const useStyles = makeStyles(theme => ({
     // styles go here
-    root: {}
+    root: {
+        height: '100%'
+    },
+    grid: {
+        height: '100%'
+    },
+    gridItem: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        alignContent: 'flex-start'
+    },
+    label: {
+        color: 'white',
+        marginTop: 10
+    },
+    input: {
+        height: 50,
+        width: 50,
+        fontSize: 20,
+        outline: 'none',
+        border: 'unset',
+        color: 'white',
+        textAlign: 'center',
+        background: theme.palette.primary.main
+    }
 }))
 
 const ControlPanel = props => {
@@ -15,15 +40,21 @@ const ControlPanel = props => {
     const { genTrigger, setGenTrigger } = props
     return (
         <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={4}>
-                    yo
+            <Grid container className={classes.grid}>
+                <Grid item xs={4} className={classes.gridItem}>
+                    <input className={classes.input} />
+                    <Typography className={classes.label}>Branches</Typography>
                 </Grid>
-                <Grid item xs={4}>
-                    <button onClick={() => setGenTrigger(genTrigger + 1)}>Generate Fractal</button>
+                <Grid item xs={4} className={classes.gridItem}>
+                    <Button variant="contained" color="primary" onClick={() => setGenTrigger(genTrigger + 1)} style={{
+                        height: 50
+                    }}>
+                        Generate Fractal
+                    </Button>
                 </Grid>
-                <Grid item xs={4}>
-                    3
+                <Grid item xs={4} className={classes.gridItem}>
+                    <input className={classes.input} />
+                    <Typography className={classes.label}>Angle</Typography>
                 </Grid>
             </Grid>
         </div>

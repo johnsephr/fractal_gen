@@ -37,7 +37,7 @@ const CanvasContainer = props => {
 
             // push canvas to middle of the screen on initial render
             if (genTrigger === 0) {
-                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
             }
 
             // on button click, restore canvas position and clear the canvas
@@ -45,7 +45,7 @@ const CanvasContainer = props => {
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 // push the canvas back to the middle of the screen
-                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
             }
 
             // the angle at which the branches split into smaller ones
@@ -92,13 +92,13 @@ const CanvasContainer = props => {
             <canvas
                 ref={canvasRef}
                 width={window.innerWidth}
-                height={window.innerHeight}
+                height={window.innerHeight - 150}
                 style={{
                     position: 'relative',
                     top: 0,
                     left: 0,
-                    width: '100%',
-                    height: '100%',
+                    // width: '100%',
+                    // height: '100%',
                     background: 'black'
                 }}
             />

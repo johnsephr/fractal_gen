@@ -13,7 +13,12 @@
   src: local('SF-Pro-Text'), url(./fonts/SF-Pro-Text/SF-Pro-Text-Heavy.otf) format('truetype');
 }
 
+html {
+  background: black;
+}
+
 body {
+  background: black;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "SF-Pro-Text", "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
