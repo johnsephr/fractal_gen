@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 
 // Components
-import HeaderContainer from '../HeaderContainer/HeaderContainer'
+import CanvasContainer from '../CanvasContainer/CanvasContainer'
+import ControlPanelContainer from '../ControlPanelContainer/ControlPanelContainer'
 
 // MUI
 import { Typography, Grid } from '@material-ui/core'
@@ -26,9 +27,12 @@ const useStyles = makeStyles(theme => ({
 
 const HomePage = props => {
     const classes = useStyles(props)
+    const canvasRef = useRef(null)
+
     return (
         <Fragment>
-            <HeaderContainer />
+            <CanvasContainer />
+            {/* <ControlPanelContainer /> */}
         </Fragment>
     )
 }
