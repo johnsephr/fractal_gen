@@ -8,32 +8,23 @@ import ControlPanelContainer from '../ControlPanelContainer/ControlPanelContaine
 import { Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
+// Contexts
+import ControlPanelContextProvider from '../../contexts/ControlPanelContext'
+
 // Styles
 const useStyles = makeStyles(theme => ({
     // styles go here
     root: {},
-    grid: {
-        // padding: '125px'
-        padding: 0
-    },
-    headerContainer: {
-
-    },
-    text: {
-        flexGrow: 1,
-        padding: 15
-    }
 }))
 
 const HomePage = props => {
     const classes = useStyles(props)
-    const canvasRef = useRef(null)
 
     return (
-        <Fragment>
+        <ControlPanelContextProvider>
             <CanvasContainer />
-            {/* <ControlPanelContainer /> */}
-        </Fragment>
+            <ControlPanelContainer />
+        </ControlPanelContextProvider>
     )
 }
 

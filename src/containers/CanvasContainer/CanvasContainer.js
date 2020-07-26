@@ -1,10 +1,13 @@
 
 
-import React, { Fragment, useRef, useState, useEffect } from 'react'
+import React, { Fragment, useRef, useContext, useEffect } from 'react'
 
 // MUI
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
+// contexts
+import { ControlPanelContext } from '../../contexts/ControlPanelContext';
 
 // Styles
 const useStyles = makeStyles(theme => ({
@@ -15,16 +18,11 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-// render canvas initially and run the 'draw fractal' code,
-// button onClick destroys canvas element and creates a new one, 
-// then the 'draw fractal' code runs to draw a new fractal.
-
-// so i need a function that 
-
 const CanvasContainer = props => {
     const classes = useStyles(props)
-    const [genTrigger, setGenTrigger] = useState(0)
+    const { genTrigger } = useContext(ControlPanelContext);
     const canvasRef = useRef(null)
+
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -104,7 +102,6 @@ const CanvasContainer = props => {
                     background: 'black'
                 }}
             />
-            <button onClick={() => setGenTrigger(genTrigger + 1)}>Generate Fractal</button>
         </Fragment>
     )
 }
