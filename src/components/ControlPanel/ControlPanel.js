@@ -25,13 +25,14 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
         height: 50,
-        width: 50,
+        width: 100,
         fontSize: 20,
         outline: 'none',
         border: 'unset',
         color: 'white',
         textAlign: 'center',
-        background: theme.palette.primary.main
+        background: theme.palette.primary.main,
+        borderRadius: 4,
     }
 }))
 
@@ -42,7 +43,7 @@ const ControlPanel = props => {
         <div className={classes.root}>
             <Grid container className={classes.grid}>
                 <Grid item xs={4} className={classes.gridItem}>
-                    <input className={classes.input} />
+                    <input className={classes.input} type='number' />
                     <Typography className={classes.label}>Branches</Typography>
                 </Grid>
                 <Grid item xs={4} className={classes.gridItem}>
@@ -53,7 +54,7 @@ const ControlPanel = props => {
                     </Button>
                 </Grid>
                 <Grid item xs={4} className={classes.gridItem}>
-                    <input className={classes.input} />
+                    <input className={classes.input}type='number' />
                     <Typography className={classes.label}>Angle</Typography>
                 </Grid>
             </Grid>
