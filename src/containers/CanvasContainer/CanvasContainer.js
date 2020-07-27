@@ -20,36 +20,41 @@ const useStyles = makeStyles(theme => ({
 
 const CanvasContainer = props => {
     const classes = useStyles(props)
-    const { genTrigger } = useContext(ControlPanelContext);
+    const { genTrigger, branchesCount, angleValue, random } = useContext(ControlPanelContext);
     const canvasRef = useRef(null)
 
     useEffect(() => {
-        const canvas = canvasRef.current
-        if (canvas) {
+        const canvas = canvasRef.current;
+        if (canvas && branchesCount && angleValue) {
+
+            // init canvas as ctx
             const ctx = canvas.getContext('2d')
+
+            //
             const maxLevel = 5;
+
+            // the amount of branches that come off of the previous branch
             const branches = 2;
-            const sides = Math.floor((Math.random() * 10) + 3);
+
+            // the amount of "branches" or sides the fractal will have
+            const sides = random ? Math.floor((Math.random() * 10) + 3) : branchesCount;
 
             // save canvas position before translation begins
             ctx.save();
 
-            // push canvas to middle of the screen on initial render
-            if (genTrigger === 0) {
-                ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
-            }
+            // move canvas to corner of screen to clear previous drawing
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-            // on button click, restore canvas position and clear the canvas
-            if (genTrigger >= 1) {
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // push the canvas back to the middle of the screen
-                ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
-            }
+            // clear previous drawing
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // push the canvas (back) to the middle of the screen
+            ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
 
             // the angle at which the branches split into smaller ones
-            const angle = Math.PI * 2 * 0.85;
+            const angle = Math.PI * 2 * angleValue;
 
+            // (recursive) function to draw fractal
             function drawLine(level) {
                 if (level > maxLevel) return;
 
@@ -84,7 +89,7 @@ const CanvasContainer = props => {
                 ctx.rotate(Math.PI * 2 / sides);
             }
         }
-    }, [genTrigger])
+    }, [genTrigger, branchesCount, angleValue, random])
 
     return (
         <Fragment>

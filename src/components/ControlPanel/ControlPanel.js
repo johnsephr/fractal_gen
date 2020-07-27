@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react'
+import React, { useContext } from 'react'
 
 // MUI
-import { Button, Grid, Typography } from '@material-ui/core'
+import { Button, Grid, Typography, Checkbox } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
+// contexts
+import { ControlPanelContext } from '../../contexts/ControlPanelContext';
 
 // Styles
 const useStyles = makeStyles(theme => ({
@@ -38,12 +41,36 @@ const useStyles = makeStyles(theme => ({
 
 const ControlPanel = props => {
     const classes = useStyles(props)
-    const { genTrigger, setGenTrigger } = props
+    const {
+        genTrigger,
+        setGenTrigger,
+        random,
+        setRandom,
+        branchesCount,
+        setBranchesCount,
+        angleValue,
+        setAngleValue
+    } = useContext(ControlPanelContext);
+
+    const onCheckboxChange = () => {
+        setRandom(!random);
+    }
+
+    const onBranchesCountChange = e => {
+        // e.preventDefault();
+        setBranchesCount(e.target.value);
+    }
+
+    const onAngleValueChange = e => {
+        // e.preventDefault();
+        setAngleValue(e.target.value);
+    }
+
     return (
         <div className={classes.root}>
             <Grid container className={classes.grid}>
                 <Grid item xs={4} className={classes.gridItem}>
-                    <input className={classes.input} type='number' />
+                    <input className={classes.input} type='number' value={branchesCount} onChange={onBranchesCountChange} />
                     <Typography className={classes.label}>Branches</Typography>
                 </Grid>
                 <Grid item xs={4} className={classes.gridItem}>
@@ -52,9 +79,21 @@ const ControlPanel = props => {
                     }}>
                         Generate Fractal
                     </Button>
+                    <div>
+                        <Typography className={classes.label}>Randomize</Typography>
+                        <Checkbox
+                            checked={random}
+                            onChange={onCheckboxChange}
+                            name="random"
+                            color="primary"
+                            style={{
+                                borderColor: 'white'
+                            }}
+                        />
+                    </div>
                 </Grid>
                 <Grid item xs={4} className={classes.gridItem}>
-                    <input className={classes.input}type='number' />
+                    <input className={classes.input} type='number' value={angleValue} onChange={onAngleValueChange} />
                     <Typography className={classes.label}>Angle</Typography>
                 </Grid>
             </Grid>

@@ -8,7 +8,7 @@ import ControlPanel from '../../components/ControlPanel/ControlPanel'
 import { makeStyles } from '@material-ui/core/styles'
 
 // contexts
-import { ControlPanelContext } from '../../contexts/ControlPanelContext';
+import ControlPanelContextProvider, { ControlPanelContext } from '../../contexts/ControlPanelContext';
 
 // Styles
 const useStyles = makeStyles(theme => ({
@@ -25,10 +25,9 @@ const useStyles = makeStyles(theme => ({
 
 const ControlPanelContainer = props => {
     const classes = useStyles(props)
-    const { genTrigger, setGenTrigger } = useContext(ControlPanelContext);
     return (
         <div className={classes.root}>
-            <ControlPanel genTrigger={genTrigger} setGenTrigger={setGenTrigger} />
+            <ControlPanel />
         </div>
     )
 }
