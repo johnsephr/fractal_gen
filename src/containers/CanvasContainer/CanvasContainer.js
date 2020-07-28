@@ -86,7 +86,7 @@ const CanvasContainer = props => {
                 ctx.rotate(Math.PI * 2 / branches);
             }
         }
-    }, [genTrigger, branches, angle])
+    }, [genTrigger, branches, angle, levels])
 
     return (
         <Fragment>

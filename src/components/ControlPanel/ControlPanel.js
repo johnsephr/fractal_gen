@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
 
+// react-input-number
+import InputNumber from 'react-input-number'
+
 // MUI
 import { Button, Grid, Typography, Checkbox, FormGroup, FormControlLabel } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 // contexts
-import { ControlPanelContext } from '../../contexts/ControlPanelContext';
+import { ControlPanelContext } from '../../contexts/ControlPanelContext'
 
 // Styles
 const useStyles = makeStyles(theme => ({
@@ -55,22 +58,9 @@ const ControlPanel = props => {
         setLevels
     } = useContext(ControlPanelContext);
 
-    const onBranchesChange = e => {
-        setBranches(e.target.value);
-    }
-
-    const onAngleChange = e => {
-        setAngle(e.target.value);
-    }
-
-    const onLevelsChange = e => {
-        console.log(e.target.value)
-        setLevels(e.target.value);
-    }
-
     return (
         <div className={classes.root}>
-            <FormGroup row style={{ marginBottom: 10}}>
+            <FormGroup row style={{ marginBottom: 10 }}>
                 <Grid container>
                     <Grid item xs={12} className={classes.gridItem}>
                         <Button variant="contained" color="primary" onClick={() => setGenTrigger(genTrigger + 1)} style={{
@@ -99,15 +89,15 @@ const ControlPanel = props => {
             <FormGroup row>
                 <Grid container>
                     <Grid item xs={4} className={classes.gridItem}>
-                        <input className={classes.input} type='number' value={branches} onChange={onBranchesChange} />
+                        <InputNumber className={classes.input} step={1} value={branches} onChange={setBranches} enableMobileNumericKeyboard />
                         <Typography className={classes.label}>Branches</Typography>
                     </Grid>
                     <Grid item xs={4} className={classes.gridItem}>
-                        <input className={classes.input} type='number' value={angle} onChange={onAngleChange} />
+                        <InputNumber className={classes.input} step={1} value={angle} onChange={setAngle} enableMobileNumericKeyboard />
                         <Typography className={classes.label}>Angle</Typography>
                     </Grid>
                     <Grid item xs={4} className={classes.gridItem}>
-                        <input className={classes.input} type='number' value={levels} min="1" max="5" onChange={onLevelsChange} />
+                        <InputNumber className={classes.input} step={1} value={levels} min={1} max={5} onChange={setLevels} enableMobileNumericKeyboard />
                         <Typography className={classes.label}>Levels</Typography>
                     </Grid>
                 </Grid>
