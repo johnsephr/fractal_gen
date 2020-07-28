@@ -20,24 +20,21 @@ const useStyles = makeStyles(theme => ({
 
 const CanvasContainer = props => {
     const classes = useStyles(props)
-    const { genTrigger, branchesCount, angleValue, random } = useContext(ControlPanelContext);
+    const { genTrigger, branches, angle, levels } = useContext(ControlPanelContext);
     const canvasRef = useRef(null)
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        if (canvas && branchesCount && angleValue) {
+        if (canvas && branches && angle) {
 
             // init canvas as ctx
             const ctx = canvas.getContext('2d')
 
-            //
-            const maxLevel = 5;
+            // levels of branches the function descends
+            const maxLevel = levels;
 
             // the amount of branches that come off of the previous branch
-            const branches = 2;
-
-            // the amount of "branches" or sides the fractal will have
-            const sides = random ? Math.floor((Math.random() * 10) + 3) : branchesCount;
+            const branchesCount = 2;
 
             // save canvas position before translation begins
             ctx.save();
@@ -51,8 +48,8 @@ const CanvasContainer = props => {
             // push the canvas (back) to the middle of the screen
             ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
 
-            // the angle at which the branches split into smaller ones
-            const angle = Math.PI * 2 * angleValue;
+            // actual angle value used in function below
+            const decimalAngle = angle / 100;
 
             // (recursive) function to draw fractal
             function drawLine(level) {
@@ -62,21 +59,21 @@ const CanvasContainer = props => {
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
-                ctx.lineTo(200, 0);
+                ctx.lineTo(250, 0);
                 ctx.stroke();
 
-                for (let i = 1; i < branches + 1; i++) {
+                for (let i = 1; i < branchesCount + 1; i++) {
                     ctx.save();
-                    ctx.translate(200 * i / (branches + 1), 0);
+                    ctx.translate(250 * i / (branchesCount + 1), 0);
                     ctx.scale(0.5, 0.5);
                     ctx.save();
 
-                    ctx.rotate(angle);
+                    ctx.rotate(decimalAngle);
                     drawLine(level + 1);
                     ctx.restore();
                     ctx.save();
 
-                    ctx.rotate(-angle);
+                    ctx.rotate(-decimalAngle);
                     drawLine(level + 1);
                     ctx.restore();
 
@@ -84,19 +81,19 @@ const CanvasContainer = props => {
                 }
             }
 
-            for (let i = 0; i < sides; i++) {
+            for (let i = 0; i < branches; i++) {
                 drawLine(0);
-                ctx.rotate(Math.PI * 2 / sides);
+                ctx.rotate(Math.PI * 2 / branches);
             }
         }
-    }, [genTrigger, branchesCount, angleValue, random])
+    }, [genTrigger, branches, angle])
 
     return (
         <Fragment>
             <canvas
                 ref={canvasRef}
                 width={window.innerWidth}
-                height={window.innerHeight - 150}
+                height={window.innerHeight - 180}
                 style={{
                     position: 'relative',
                     top: 0,

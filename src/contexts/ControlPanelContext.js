@@ -1,25 +1,44 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useRef, useEffect } from 'react';
 
 // create context
 export const ControlPanelContext = createContext();
 
 const ControlPanelContextProvider = props => {
     const [genTrigger, setGenTrigger] = useState(0);
-    const [random, setRandom] = useState(true);
-    const [branchesCount, setBranchesCount] = useState(9);
-    const [angleValue, setAngleValue] = useState(0.85);
+    const [branches, setBranches] = useState(9);
+    const [angle, setAngle] = useState(85);
+    const [levels, setLevels] = useState(3);
+
+    // init ref
+    const prevGenTriggerRef = useRef();
+
+    // constantly fetch the previous value of genTrigger, to know when the generate button is pushed
+    useEffect(() => {
+        prevGenTriggerRef.current = genTrigger;
+    });
+
+    // store value in const
+    const prevGenTrigger = prevGenTriggerRef.current;
+
+    // if generate button is pushed, generate random values for angle and branches
+    useEffect(() => {
+        if (prevGenTrigger < genTrigger) {
+            setAngle(Math.floor(Math.random() * 101))
+            setBranches(Math.floor((Math.random() * 10) + 3))
+        }
+    }, [genTrigger])
 
     return (
         <ControlPanelContext.Provider
             value={{
                 genTrigger,
                 setGenTrigger,
-                random,
-                setRandom,
-                branchesCount,
-                setBranchesCount,
-                angleValue,
-                setAngleValue
+                branches,
+                setBranches,
+                angle,
+                setAngle,
+                levels,
+                setLevels
             }}>
             {props.children}
         </ControlPanelContext.Provider>

@@ -14,11 +14,9 @@ import ControlPanelContextProvider, { ControlPanelContext } from '../../contexts
 const useStyles = makeStyles(theme => ({
     // styles go here
     root: {
-        // position: 'absolute',
-        // bottom: 20,
-        // left: 0,
-        background: 'black',
-        height: 150,
+        background: '#888',
+        padding: 20,
+        height: 175,
         width: '100%'
     }
 }))
