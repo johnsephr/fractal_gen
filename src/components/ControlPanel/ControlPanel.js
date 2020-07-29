@@ -42,6 +42,11 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         background: 'transparent',
         borderRadius: 4,
+    },
+    trackMouseFormControl: {
+        position: 'absolute',
+        right: 20,
+        top: 20,
     }
 }))
 
@@ -60,7 +65,7 @@ const ControlPanel = props => {
 
     return (
         <div className={classes.root}>
-            <FormGroup row style={{ marginBottom: 10 }}>
+            <FormGroup row style={{ marginBottom: 20 }}>
                 <Grid container>
                     <Grid item xs={12} className={classes.gridItem}>
                         <Button variant="contained" color="primary" onClick={() => setGenTrigger(genTrigger + 1)} style={{
@@ -69,6 +74,7 @@ const ControlPanel = props => {
                             Generate Fractal
                         </Button>
                         {/* <FormControlLabel
+                            className={classes.trackMouseFormControl}
                             control={
                                 <Checkbox
                                     checked={random}

@@ -46,7 +46,7 @@ const CanvasContainer = props => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // push the canvas (back) to the middle of the screen
-            ctx.translate(canvas.width / 2, (canvas.height / 2) + -50);
+            ctx.translate(canvas.width / 2, (canvas.height / 2) - 5);
 
             // actual angle value used in function below
             const decimalAngle = angle / 100;
@@ -93,12 +93,12 @@ const CanvasContainer = props => {
             <canvas
                 ref={canvasRef}
                 width={window.innerWidth}
-                height={window.innerHeight - 180}
+                height={window.innerHeight - 190}
                 style={{
                     position: 'relative',
                     top: 0,
                     left: 0,
-                    background: 'black'
+                    background: '#120a27'
                 }}
             />
         </Fragment>

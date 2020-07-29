@@ -20,11 +20,12 @@ const ControlPanelContextProvider = props => {
     // store value in const
     const prevGenTrigger = prevGenTriggerRef.current;
 
-    // if generate button is pushed, generate random values for angle and branches
+    // if generate button is pushed, generate random values for inputs
     useEffect(() => {
         if (prevGenTrigger < genTrigger) {
             setAngle(Math.floor(Math.random() * 101))
             setBranches(Math.floor((Math.random() * 10) + 3))
+            setLevels(Math.floor((Math.random() * 6)))
         }
     }, [genTrigger])
 

@@ -14,9 +14,9 @@ import ControlPanelContextProvider, { ControlPanelContext } from '../../contexts
 const useStyles = makeStyles(theme => ({
     // styles go here
     root: {
-        background: '#888',
+        background: '#120a27',
         padding: 20,
-        height: 175,
+        height: 190,
         width: '100%'
     }
 }))

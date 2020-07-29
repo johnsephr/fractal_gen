@@ -15,7 +15,7 @@ import ControlPanelContextProvider from '../../contexts/ControlPanelContext'
 const useStyles = makeStyles(theme => ({
     // styles go here
     root: {
-        background: 'black'
+        background: '#120a27'
     },
 }))
 
