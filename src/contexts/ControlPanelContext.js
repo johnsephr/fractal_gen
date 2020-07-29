@@ -8,6 +8,8 @@ const ControlPanelContextProvider = props => {
     const [branches, setBranches] = useState(9);
     const [angle, setAngle] = useState(85);
     const [levels, setLevels] = useState(3);
+    const [strokeStyle, setStrokeStyle] = useState('#FFFFFF');
+    const [downloadImage, setDownloadImage] = useState(false);
 
     // init ref
     const prevGenTriggerRef = useRef();
@@ -39,7 +41,11 @@ const ControlPanelContextProvider = props => {
                 angle,
                 setAngle,
                 levels,
-                setLevels
+                setLevels,
+                strokeStyle,
+                setStrokeStyle,
+                downloadImage,
+                setDownloadImage
             }}>
             {props.children}
         </ControlPanelContext.Provider>

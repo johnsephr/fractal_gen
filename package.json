@@ -8,6 +8,7 @@
     "@material-ui/styles": "^4.5.0",
     "@material-ui/system": "^4.5.1",
     "react": "^16.10.2",
+    "react-color": "^2.18.1",
     "react-dom": "^16.10.2",
     "react-input-number": "^5.0.19",
     "react-router-dom": "^5.1.2",

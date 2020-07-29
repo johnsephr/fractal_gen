@@ -3,6 +3,10 @@ import React, { useContext } from 'react'
 // react-input-number
 import InputNumber from 'react-input-number'
 
+// react-color
+import { ChromePicker } from 'react-color';
+
+
 // MUI
 import { Button, Grid, Typography, Checkbox, FormGroup, FormControlLabel } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -60,8 +64,17 @@ const ControlPanel = props => {
         angle,
         setAngle,
         levels,
-        setLevels
+        setLevels,
+        strokeStyle,
+        setStrokeStyle,
+        downloadImage,
+        setDownloadImage
     } = useContext(ControlPanelContext);
+
+    // update stroke style on color change
+    const handleColorChange = (color, event) => {
+        setStrokeStyle(color.hex)
+    }
 
     return (
         <div className={classes.root}>
@@ -73,10 +86,10 @@ const ControlPanel = props => {
                         }}>
                             Generate Fractal
                         </Button>
-                        {/* <FormControlLabel
+                        {/* < FormControlLabel
                             className={classes.trackMouseFormControl}
                             control={
-                                <Checkbox
+                                < Checkbox
                                     checked={random}
                                     onChange={onCheckboxChange}
                                     name="random"
@@ -106,13 +119,22 @@ const ControlPanel = props => {
                         <InputNumber className={classes.input} step={1} value={levels} min={1} max={5} onChange={setLevels} enableMobileNumericKeyboard />
                         <Typography className={classes.label}>Levels</Typography>
                     </Grid>
+
+                    <Grid item xs={12} className={classes.gridItem} style={{
+                        paddingTop: 20
+                    }}>
+                        <Button variant='contained' color='primary' onClick={() => setDownloadImage(!downloadImage)}>Download</Button>
+                    </Grid>
+
+                    <Grid item xs={12} className={classes.gridItem} style={{
+                        paddingTop: 20
+                    }}>
+                        <ChromePicker color={strokeStyle} onChange={handleColorChange} disableAlpha />
+                    </Grid>
                 </Grid>
             </FormGroup>
-
-            {/* branches, angle, track mouse position, levels */}
         </div>
     )
 }
 
 export default ControlPanel
-

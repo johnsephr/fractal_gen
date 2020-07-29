@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         background: '#120a27',
         padding: 20,
-        height: 190,
+        height: 'auto',
         width: '100%'
     }
 }))

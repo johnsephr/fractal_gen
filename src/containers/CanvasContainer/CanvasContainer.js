@@ -20,13 +20,12 @@ const useStyles = makeStyles(theme => ({
 
 const CanvasContainer = props => {
     const classes = useStyles(props)
-    const { genTrigger, branches, angle, levels } = useContext(ControlPanelContext);
+    const { genTrigger, branches, angle, levels, strokeStyle, downloadImage, setDownloadImage } = useContext(ControlPanelContext);
     const canvasRef = useRef(null)
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (canvas && branches && angle) {
-
             // init canvas as ctx
             const ctx = canvas.getContext('2d')
 
@@ -55,7 +54,7 @@ const CanvasContainer = props => {
             function drawLine(level) {
                 if (level > maxLevel) return;
 
-                ctx.strokeStyle = '#fff';
+                ctx.strokeStyle = strokeStyle;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
@@ -80,17 +79,31 @@ const CanvasContainer = props => {
                     ctx.restore();
                 }
             }
-
             for (let i = 0; i < branches; i++) {
                 drawLine(0);
                 ctx.rotate(Math.PI * 2 / branches);
             }
         }
-    }, [genTrigger, branches, angle, levels])
+    }, [genTrigger, branches, angle, levels, strokeStyle])
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (downloadImage === true) {
+            console.log('shit')
+
+            var link = document.createElement('a');
+            link.download = 'fractal.png';
+            link.href = document.getElementById('canvas').toDataURL()
+            link.click();
+
+            setDownloadImage(false)
+        }
+    }, [downloadImage])
 
     return (
         <Fragment>
             <canvas
+                id="canvas"
                 ref={canvasRef}
                 width={window.innerWidth}
                 height={window.innerHeight - 190}
